@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title%} pesquisa produtos{% endblock %}
+
+<!DOCTYPE html>
+
+{% block content%}                                       
+<div class="container">
+    <div  class="row">
+        <div class="col-md-8">
+           
+            {% if result %}
+            <h3> <span class="text-danger">{{request.GET.keyword}}</span></h3>
+             {% else %} 
+             <h3>Resultado da pesquisa não encontrado </h3>
+            {% endif %}
+            <br>
+            {% for res in result %}
+            <div class="row">
+                <div class="col-md-8">
+                    <img src="{{res.image.url}}"  class="img-fluid" >
+                </div>
+                <div class="col-md-4">
+                 <h4 class="">{{res.titulo}}</h4>
+                 <p>Preço €{{res.slug}}</p>
+                 <p>{{res.descricao}}</p>
+                 <p>Preço €{{res.venda}}</p>
+                 <p>Preço €{{res.garantia}}</p>
+                 <p>Preço €{{res.return_devolucao}}</p>
+                </div>
+            </div>
+             
+            {% endfor %}
+                           
+                     
+        </div>
+     </div> 
+</div>
+
+{% endblock %}

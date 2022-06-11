@@ -1,0 +1,67 @@
+
+   {% extends 'base.html' %}
+   {% block title%}MeuCarro{% endblock %}
+  
+   <!DOCTYPE html>
+  {% block content %}
+  
+<div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>ITEM DO CARRINHO</h4>
+                  <table class="table">
+                       <thead>
+                             <tr>
+                                <th>Código</th> 
+                                <th>Produto</th>  
+                                <th>Preco</th>  
+                                <th>Quantidade</th> 
+                                <th>Subtotal</th>  
+                                  
+                             </tr>
+                        </thead>
+                        <tbody>  
+                             {% for cp in carro.carroproduto_set.all %}
+                                <tr>
+                                  <td>{{forloop.counter}}</td>  
+                                  <td>{{cp.produto.titulo}}</td> 
+                                  <td>{{cp.avaliacao}}</td> 
+                                  <td>{{cp.quantidade}}</td>   
+                                  <td>{{cp.subtotal}}</td>     
+                                </tr> 
+                                
+                                <td>
+                                    <a href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=inc" class=" btn btn-outline-danger btn-sm mt-1"> + </a>
+                                    <a href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=dcr" class=" btn btn-outline-danger btn-sm mt-1"> - </a>
+                                    <a href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=rmv" class=" btn btn-outline-danger btn-sm mt-1"> x </a>
+                                </td>    
+                             {% endfor %}
+                              <tr>
+                                  <th colspan="4" class="text-right"> Carrinho Total</th>
+                                  <th>€:{{carro.total}} </th> 
+                                  <tr>
+                                    <th>
+                                      {% if carro.carroproduto_set.all %}
+                                      <a href="{% url 'lojaapp:limparcarro' %}"class=" btn btn-outline-danger"> Limpar Carrinho</a>
+                                    </th>
+                                    {% endif %}  
+                                  </tr> 
+                                  {% if carro.carroproduto_set.all %}
+                                  <tr>
+                                   <th> 
+                                    <a href="{% url 'lojaapp:checkout' %}" class=" btn btn-outline-danger"> Processar Compra</a>
+                                  </th>
+                                   
+                                  </tr>        
+                                  {% endif %}
+                         </tbody>    
+                           
+                  </table> 
+                     
+            </div>  
+        </div>    
+
+</div>
+
+
+{% endblock %}

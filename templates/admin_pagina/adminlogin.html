@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title%} Administrador{% endblock %}
+
+
+
+{% block content%}
+ <style>
+     .errorlist{
+         color: red;
+         list-style: none;
+     }
+ </style>
+
+
+                                        
+<div class="container mt-5">
+  
+    <div  class="row">
+        <h3>ADMINISTRADOR</h3>
+            <form action="" method="POST">            
+                {% csrf_token %}
+               {{form.as_p}}
+               <button    class="btn btn-primary btn-danger" style="width: 250px; margin-left: 100px;"> Entrar </button>
+               {% if error %}
+               <li style="color:red;">{{error}}</li>
+               {% endif %}
+            </form>
+          
+    </div> 
+</div>
+
+
+
+
+{% endblock %}

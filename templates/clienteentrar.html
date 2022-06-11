@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title%} Registo Cliente {% endblock %}
+
+
+
+{% block content%}
+ <style>
+     .errorlist{
+         color: red;
+         list-style: none;
+     }
+ </style>
+
+
+                                        
+<div class="container mt-5">
+  
+    <div  class="row">
+        <h3>Entar</h3>
+            <form  method="POST">            
+               {% csrf_token %}
+               {{form.as_p}}
+               <button   class="btn btn-primary btn-danger" style="width: 250px; margin-left: 100px;"> Entrar</button>
+               {% if error %}
+               <li style="color:red;">{{error}}</li>
+               {% endif %}
+            </form>
+            <p>se não tem registo faça o seu registo<a href="{% url 'lojaapp:clienteregistar'%} {% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Registo </p></a> 
+    </div> 
+</div>
+
+
+
+
+{% endblock %}

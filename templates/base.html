@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel ="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link rel ="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">  
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <title>{% block title%} {% endblock %}</title>
+    </head>
+    <body>
+        <div class="container mt-3" >
+            <a href="{% url 'lojaapp:home'%}" class="btn btn-outline-danger">PÁGINA PRINCIPAL</a>
+            <a href="{% url 'lojaapp:todosprodutos'%}" class="btn btn-outline-danger">CATEGORIAS</a>
+            <a href="{% url 'lojaapp:meucarro'%}" class="btn btn-outline-danger">CARRINHO</a>
+            {% if request.user.cliente %}
+            seja bem vindo {{request.user.username}}
+            <a href="{% url 'lojaapp:clienteperfil'%}" class="btn btn-outline-danger">Meu Perfil</a>
+            <a href="{% url 'lojaapp:clientesair'%}" class="btn btn-outline-danger">Sair</a>   
+            {% else %}
+            <a href="{% url 'lojaapp:clienteregistar'%}" class="btn btn-outline-danger">REGISTO CLIENTE</a>
+            <a href="{% url 'lojaapp:clienteentrar'%}" class="btn btn-outline-danger">ENTRAR</a>
+            <a href="{% url 'lojaapp:adminlogin'%}" class="btn btn-outline-danger">ADMINISTRADOR</a>
+            {% endif %}
+            <div  class="float-lg-right">
+                <form action="{% url 'lojaapp:pesquisar' %}"  autocomplete="on" method="GET">
+                <input  name="keyword" type="text" placeholder="pesquisar produto" style=" height: 35px;"   required>
+                <button class="btn btn-outline-danger">Pesquisa</button>
+                </form>
+            </div> 
+      </div>
+      <hr>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

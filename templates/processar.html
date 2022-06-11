@@ -1,0 +1,58 @@
+
+{% extends "base.html" %}
+{% load static %} 
+{% block title%}Processar Compra{% endblock %}
+{% load static %} 
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block content%}
+
+
+<div class="container ">
+    <a href="{% url 'lojaapp:meucarro' %}" class=" btn btn-outline-danger btn-sm mt-3">Atualizar Carrinho </a>
+    <table class="table border border-danger mt-4">
+        <thead  class="border border-danger">
+              <tr  class="border border-danger">
+                 <th class="border border-danger ">Código</th> 
+                 <th class="border border-danger">Produto</th>  
+                 <th class="border border-danger">Avaliacao</th>  
+                 <th class="border border-danger">Quantidade</th> 
+                 <th class="border border-danger">Subtotal</th>  
+                 <th class="border border-danger">Acao</th>      
+              </tr>
+         </thead>
+         <tbody class="border border-danger">  
+              {% for cp in carro.carroproduto_set.all %}
+                 <tr  class="border border-danger">
+                   <td  class="border border-danger">{{forloop.counter}}</td>  
+                   <td  class="border border-danger">{{cp.produto.titulo}}</td> 
+                   <td class="border border-danger">{{cp.avaliacao}}</td> 
+                   <td class="border border-danger">{{cp.quantidade}}</td>   
+                   <td class="border border-danger">{{cp.subtotal}}</td>     
+                 </tr>
+                {% endfor %} 
+         </tbody>
+         <tr  class="border border-danger">
+            <th colspan="4" class="bg text-center border border-danger">Valor total</th>
+            <th>£.{{carro.total}}</th>
+
+         </tr>
+     </table>            
+     <div class=" text-center">
+         <h3>Detalhe da Compra</h3>
+             <form action="" method="POST">           
+                {%csrf_token %}
+                {{form.as_p}}
+                 <button    class="btn btn-primary btn-danger" style="width: 300px;"> Compra</button>
+              </form> 
+       
+        </div>
+    </div>
+   
+        
+      
+</div>
+
+                                   
+{% endblock %}

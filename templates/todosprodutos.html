@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block title%} Todos Produtos{% endblock %}
+
+
+<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
+{% block content%}
+
+
+
+                                        
+<div class="container">
+
+    {% for cat in  todoscategorias %}  
+    <h1>{{cat.titulo}}</h1>
+    <div  class="row">
+        {% for lista in  cat.produto_set.all %}   
+        <div class="col-md-4">
+            <div class="mt-4">
+                <div class="card">
+                   
+                    <h4 class="text-center"><a href=" {% url 'lojaapp:produtodetalhe' lista.slug %}"> {{lista.titulo }} </h4></a>
+                      <img  class="text-center" src="{{lista.image.url}}" width="150">
+                              <p class="m-4">PREÇO: <strike> € .{{lista.preco_mercado }}</strike> € {{lista.venda}}</p>             
+                            <div class="text-center "> 
+                                <a href="{% url 'lojaapp:meucarro'%}" class="btn btn-outline-danger">CARRINHO</a>
+                                <button class="btn btn-outline-danger btn-sm mt-1">Comprar</button> 
+                             </div>
+                            </div>   
+                  </div>
+        </div>
+{% endfor %}
+</div> 
+{% endfor %}
+</div>
+{% endblock %}
